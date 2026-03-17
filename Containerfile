@@ -35,6 +35,9 @@ RUN curl -fsSL https://rpm.nodesource.com/setup_22.x | bash - && \
     dnf install -y nodejs && \
     dnf clean all
 
+# Install pnpm (required to build Weaver UI)
+RUN npm install -g pnpm
+
 # Verify versions
 RUN rustc --version && cargo --version && node --version && npm --version
 
@@ -43,7 +46,12 @@ WORKDIR /weaver
 
 # Clone the Weaver repo and checkout v0.21.2
 RUN git clone https://github.com/open-telemetry/weaver.git . && \
-    git checkout v0.21.2
+    git checkout v0.22.1
+
+# Build Weaver UI assets (generates ui/dist used at compile time)
+RUN cd ui && \
+    pnpm install --frozen-lockfile && \
+    pnpm build
 
 # Build Weaver release
 RUN cargo build --release

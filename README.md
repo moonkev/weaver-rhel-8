@@ -1,6 +1,6 @@
 # Weaver Build on AlmaLinux 8
 
-This repository provides a Docker/Podman setup to build Weaver v0.21.2 on AlmaLinux 8 (compatible with RHEL 8). To build the Weaver image, run (switch podman with docker if that is what you use):
+This repository provides a Docker/Podman setup to build Weaver v0.22.1 on AlmaLinux 8 (compatible with RHEL 8). To build the Weaver image, run (switch podman with docker if that is what you use):
 
 ```bash
 podman build -t weaver-build .
@@ -20,5 +20,5 @@ The `weaver` binary is now available in your current directory and ready to run 
 ./weaver --help
 ```
 
-Weaver requires Rust and Node.js for building, but the final binary is standalone. The build image includes OpenSSL and Perl development libraries needed for compilation. This Dockerfile produces a clean minimal image containing only the final Weaver binary. This repository follows the license of the Weaver project: [LICENSE](https://github.com/open-telemetry/weaver/blob/v0.21.2/LICENSE).
+Weaver requires Rust, Node.js, and pnpm for building (the UI assets are built during the container build), but the final binary is standalone. The build image includes OpenSSL and Perl development libraries needed for compilation. This Dockerfile produces a clean minimal image containing only the final Weaver binary. This repository follows the license of the Weaver project: [LICENSE](https://github.com/open-telemetry/weaver/blob/v0.22.1/LICENSE).
 
